@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  trentometeoapp:
+    container_name: trentometeoapp
+    image: ${DOCKER_REGISTRY-}trentometeoapp
+    build:
+      context: .
+      dockerfile: TrentoMeteoApp/Dockerfile
+    ports:
+      - "80" 
+    networks:
+      - mynetwork
+
+  trentometeosoap:
+    container_name: trentometeosoap
+    image: ${DOCKER_REGISTRY-}trentometeosoap
+    build:
+      context: .
+      dockerfile: TrentoMeteoSOAP/Dockerfile
+    ports:
+      - "8080:80"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
